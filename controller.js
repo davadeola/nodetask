@@ -1,18 +1,36 @@
 const { connect } = require("./connection");
+const { query } = require("express");
 
 connect.connect();
 
 exports.getAllStudents = async (req, res) => {
-  await connect.query(
-    "SELECT * FROM student_detail",
-    (err, results, fields) => {
-      if (err) {
-        return res.status(500).json({ success: false, error: err });
-      } else {
-        return res.status(200).json({ result: results, success: true });
+  try {
+    const page = req.query.page;
+    const offset = (page - 1) * 10;
+
+    await connect.query(
+      "SELECT * FROM student_detail limit 10 OFFSET " + offset,
+      (err, results, fields) => {
+        if (err) {
+          return res.status(500).json({ success: false, error: err });
+        } else {
+          var jsonResult = {
+            products_page_count: results.length,
+            page_number: page,
+            products: results,
+          };
+          var myJsonString = JSON.parse(JSON.stringify(jsonResult));
+
+          return res.status(200).json({ myJsonString });
+        }
       }
-    }
-  );
+    );
+  } catch (error) {
+    console.log("Something went wrong " + error);
+    return res
+      .status(500)
+      .json({ success: false, serverError: "Something went wrong " });
+  }
 };
 
 exports.addStudent = async (req, res) => {
