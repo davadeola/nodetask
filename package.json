@@ -1,0 +1,22 @@
+{
+  "name": "nodetask",
+  "version": "1.0.0",
+  "description": "Assignment for IAP class",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davadeola/nodetask.git"
+  },
+  "author": "David Adeola",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davadeola/nodetask/issues"
+  },
+  "homepage": "https://github.com/davadeola/nodetask#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
