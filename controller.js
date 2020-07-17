@@ -60,3 +60,50 @@ exports.getStudent = async (req, res) => {
       .json({ success: false, serverError: "Something went wrong " });
   }
 };
+
+exports.updateStudent = async (req, res) => {
+  try {
+    const id = req.params.studentId;
+    course = req.body.course;
+
+    await connect.query(
+      "UPDATE student_detail SET course =? WHERE id = ?",
+      [course, id],
+      (err, results, fields) => {
+        if (err) {
+          return res.status(400).json({ success: false, error: err });
+        } else {
+          return res.status(200).json({ result: results, success: true });
+        }
+      }
+    );
+  } catch (error) {
+    console.log("Something went wrong " + error);
+    return res
+      .status(500)
+      .json({ success: false, serverError: "Something went wrong " });
+  }
+};
+
+exports.deleteStudent = async (req, res) => {
+  try {
+    id = req.params.studentId;
+
+    await connect.query(
+      "DELETE FROM student_detail WHERE id = ?",
+      [id],
+      (err, results, fields) => {
+        if (err) {
+          return res.status(400).json({ success: false, error: err });
+        } else {
+          return res.status(200).json({ result: results, success: true });
+        }
+      }
+    );
+  } catch (error) {
+    console.log("Something went wrong " + error);
+    return res
+      .status(500)
+      .json({ success: false, serverError: "Something went wrong " });
+  }
+};
