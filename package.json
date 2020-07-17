@@ -2,8 +2,10 @@
   "name": "nodetask",
   "version": "1.0.0",
   "description": "Assignment for IAP class",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server",
+    "server": "nodemon server",
     "test": "npm test"
   },
   "repository": {
@@ -17,6 +19,12 @@
   },
   "homepage": "https://github.com/davadeola/nodetask#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
