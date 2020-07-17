@@ -6,7 +6,13 @@ const morgan = require("morgan");
 dotenv.config({ path: ".env" });
 const app = express();
 
-app.use(express.json); //allows body parsing
+const studentTransactions = require("./routes.js");
+
+//hook middleware before linking routes
+app.use(express.json()); //allows body parsing
+
+//defined the general route
+app.use("/api/v1/student", studentTransactions);
 
 if (process.env.NODE_ENV == "development") {
   app.use(morgan("dev"));
